@@ -28,4 +28,9 @@ class ReplyObserver
         //通知作者有新的回复
         $topic->user->notify(new TopicReplied($reply));
     }
+
+    public function deleted(Reply $reply)
+    {
+        $reply->topic->decrement('reply_count', 1);
+    }
 }
